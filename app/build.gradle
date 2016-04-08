@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "dg2.dmi.com.dagger2"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "dg2.dmi.com.dagger2.Dagger2TestRunner"
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            testCoverageEnabled = true
+            debuggable true
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        instrumentTest.setRoot('androidTest')
+    }
+}
+
+final DAGGER_VERSION = '2.0.2'
+final ESPRESSO_VERSION = '2.2.1'
+final ESPRESSO_RUNNER_VERSION = '0.4.1'
+final SUPPORT_VERSION = '23.1.1'
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+
+    compile "com.google.dagger:dagger:${DAGGER_VERSION}"
+    apt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+
+    compile "com.android.support:design:$SUPPORT_VERSION"
+    compile "com.android.support:support-v4:$SUPPORT_VERSION"
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+
+    androidTestCompile "com.android.support.test:runner:${ESPRESSO_RUNNER_VERSION}"
+    androidTestCompile "com.android.support.test:rules:${ESPRESSO_RUNNER_VERSION}"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}"
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:${ESPRESSO_VERSION}"
+    androidTestApt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+}
+
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:$SUPPORT_VERSION"
+}
+
+configurations.compile.dependencies.each { compileDependency ->
+    println "Excluding compile dependency: ${compileDependency.getName()}"
+    configurations.androidTestCompile.dependencies.each { androidTestCompileDependency ->
+        configurations.androidTestCompile.exclude module: "${compileDependency.getName()}"
+    }
+}
