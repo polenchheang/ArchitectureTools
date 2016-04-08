@@ -1,4 +1,4 @@
-package dg2.dmi.com.dagger2;
+package dg2.dmi.com.dagger2.domain;
 
 /**
  * Created by gguser on 1/29/16.

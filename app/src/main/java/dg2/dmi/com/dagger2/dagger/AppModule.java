@@ -1,9 +1,10 @@
-package dg2.dmi.com.dagger2;
+package dg2.dmi.com.dagger2.dagger;
 
 import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
+import dg2.dmi.com.dagger2.domain.DummyObject;
 
 /**
  * Created by gguser on 1/29/16.

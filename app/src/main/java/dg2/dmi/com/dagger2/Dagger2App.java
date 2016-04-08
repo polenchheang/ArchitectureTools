@@ -2,6 +2,10 @@ package dg2.dmi.com.dagger2;
 
 import android.app.Application;
 
+import dg2.dmi.com.dagger2.dagger.AppComponent;
+import dg2.dmi.com.dagger2.dagger.AppModule;
+import dg2.dmi.com.dagger2.dagger.DaggerAppComponent;
+
 /**
  * Created by gguser on 1/29/16.
  */

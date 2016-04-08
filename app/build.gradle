@@ -48,6 +48,8 @@ dependencies {
     compile "com.android.support:support-v4:$SUPPORT_VERSION"
     compile 'org.glassfish:javax.annotation:10.0-b28'
 
+    compile 'com.squareup.retrofit2:retrofit:2.0.1'
+
     androidTestCompile "com.android.support.test:runner:${ESPRESSO_RUNNER_VERSION}"
     androidTestCompile "com.android.support.test:rules:${ESPRESSO_RUNNER_VERSION}"
     androidTestCompile "com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}"

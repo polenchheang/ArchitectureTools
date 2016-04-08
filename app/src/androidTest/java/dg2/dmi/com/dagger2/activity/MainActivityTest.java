@@ -1,4 +1,4 @@
-package dg2.dmi.com.dagger2;
+package dg2.dmi.com.dagger2.activity;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -11,6 +11,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
+
+import dg2.dmi.com.dagger2.ApplicationTest;
+import dg2.dmi.com.dagger2.domain.DummyObject;
 
 /**
  * Created by gguser on 2/1/16.

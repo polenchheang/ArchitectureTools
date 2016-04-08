@@ -1,4 +1,4 @@
-package dg2.dmi.com.dagger2;
+package dg2.dmi.com.dagger2.dagger;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
