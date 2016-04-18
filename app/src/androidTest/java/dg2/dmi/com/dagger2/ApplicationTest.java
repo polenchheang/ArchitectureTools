@@ -18,7 +18,6 @@ public class ApplicationTest extends Dagger2App {
                 .build();
     }
 
-//    @Override
     public TestAppComponent getAppComponent() {
         return mTestAppComponent;
     }
