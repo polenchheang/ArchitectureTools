@@ -8,7 +8,7 @@ import dg2.dmi.com.dagger2.activity.MainActivityTest;
  */
 @AppScope
 @Component(modules = TestAppModule.class)
-public interface TestAppComponent extends AppComponent {
+public interface TestAppComponent {
 
     void inject(MainActivityTest activity);
 }

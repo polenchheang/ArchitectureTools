@@ -1,5 +1,6 @@
 package dg2.dmi.com.dagger2.dagger;
 
+import android.app.Application;
 import android.content.Context;
 
 import dagger.Module;
@@ -20,6 +21,11 @@ public class TestAppModule {
     @Provides @AppScope
     public Context provideAppContext() {
         return mContext;
+    }
+
+    @Provides
+    public Application provideApplication() {
+        return (Application) mContext.getApplicationContext();
     }
 
     @Provides public DummyObject provideDummyObject() {

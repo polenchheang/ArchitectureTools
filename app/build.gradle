@@ -46,9 +46,14 @@ dependencies {
 
     compile "com.android.support:design:$SUPPORT_VERSION"
     compile "com.android.support:support-v4:$SUPPORT_VERSION"
-    compile 'org.glassfish:javax.annotation:10.0-b28'
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+
 
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
 
     androidTestCompile "com.android.support.test:runner:${ESPRESSO_RUNNER_VERSION}"
     androidTestCompile "com.android.support.test:rules:${ESPRESSO_RUNNER_VERSION}"
