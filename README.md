@@ -1,6 +1,5 @@
 Implement most of the popular libraries
 
-Include:
 * Espresso
 * Dagger 2
 * Retrofit
