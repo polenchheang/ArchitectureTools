@@ -37,6 +37,7 @@ final DAGGER_VERSION = '2.0.2'
 final ESPRESSO_VERSION = '2.2.1'
 final ESPRESSO_RUNNER_VERSION = '0.4.1'
 final SUPPORT_VERSION = '23.1.1'
+final OKHTTP_VERSION = '3.2.0'
 
 dependencies {
     testCompile 'junit:junit:4.12'
@@ -51,9 +52,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 
+    compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    compile "com.squareup.okhttp3:logging-interceptor:${OKHTTP_VERSION}"
+    androidTestCompile "com.squareup.okhttp3:mockwebserver:${OKHTTP_VERSION}"
 
     androidTestCompile "com.android.support.test:runner:${ESPRESSO_RUNNER_VERSION}"
     androidTestCompile "com.android.support.test:rules:${ESPRESSO_RUNNER_VERSION}"
