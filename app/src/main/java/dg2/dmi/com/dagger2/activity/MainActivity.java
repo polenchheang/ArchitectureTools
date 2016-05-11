@@ -1,12 +1,13 @@
 package dg2.dmi.com.dagger2.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,9 +18,14 @@ import butterknife.ButterKnife;
 import dg2.dmi.com.dagger2.R;
 import dg2.dmi.com.dagger2.dagger.GitHubModule;
 import dg2.dmi.com.dagger2.dagger.GitHubComponentInjectable;
+import dg2.dmi.com.dagger2.domain.GithubRepo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,23 +45,33 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
 
-        final Call<ArrayList<String>> repo = mGitHubInterface.getRepository("polen");
-        repo.enqueue(new Callback<ArrayList<String>>() {
-            @Override
-            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
-                if (response.isSuccessful()) {
-                    mText.setText("success");
-                } else {
-                    mText.setText("failed");
-                }
-            }
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mGitHubInterface.getUser("linkedin")
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GithubRepo>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(MainActivity.this,"It's completed",Toast.LENGTH_LONG).show();
+                    }
 
-            @Override
-            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
+                    @Override
+                    public void onError(Throwable e) {
+                        mText.setText("failed");
+                        Toast.makeText(MainActivity.this,"It's error "+e.getMessage(),Toast.LENGTH_LONG).show();
+                    }
 
-            }
-        });
+                    @Override
+                    public void onNext(GithubRepo githubRepo) {
+                        mText.setText("success");
+                        Toast.makeText(MainActivity.this,"It's next on "+githubRepo.getLogin(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
     }
 
     @Override
