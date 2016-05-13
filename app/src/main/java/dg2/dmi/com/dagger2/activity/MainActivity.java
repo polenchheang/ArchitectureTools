@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,11 +18,7 @@ import butterknife.ButterKnife;
 import dg2.dmi.com.dagger2.R;
 import dg2.dmi.com.dagger2.dagger.GitHubModule;
 import dg2.dmi.com.dagger2.dagger.GitHubComponentInjectable;
-import dg2.dmi.com.dagger2.domain.GithubRepo;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import rx.Scheduler;
+import dg2.dmi.com.dagger2.domain.Product;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -50,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mGitHubInterface.getUser("linkedin")
+        mGitHubInterface.getProductList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GithubRepo>() {
+                .subscribe(new Subscriber<List<Product>>() {
                     @Override
                     public void onCompleted() {
                         Toast.makeText(MainActivity.this,"It's completed",Toast.LENGTH_LONG).show();
@@ -66,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(GithubRepo githubRepo) {
+                    public void onNext(List<Product> product) {
                         mText.setText("success");
-                        Toast.makeText(MainActivity.this,"It's next on "+githubRepo.getLogin(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"It's next on "+ product.size(),Toast.LENGTH_LONG).show();
                     }
                 });
 

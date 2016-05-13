@@ -28,8 +28,30 @@ android {
         }
     }
 
+    productFlavors {
+        dev {
+            applicationIdSuffix ".dev"
+            buildConfigField "String", "ENDPOINT", "\"https://productlist-dev.herokuapp.com\""
+        }
+
+        stage {
+            applicationIdSuffix ".stage"
+            buildConfigField "String", "ENDPOINT", "\"https://productlist-stage.herokuapp.com\""
+        }
+
+        production {
+            buildConfigField "String", "ENDPOINT", "\"https://productlist.herokuapp.com\""
+        }
+    }
+
     sourceSets {
         instrumentTest.setRoot('androidTest')
+    }
+
+    dexOptions {
+        incremental true
+        maxProcessCount 4
+        javaMaxHeapSize "2g"
     }
 }
 

@@ -33,7 +33,7 @@ public class Dagger2App extends Application {
 
     @NonNull
     protected String getBaseUrl() {
-        return "https://api.github.com";
+        return BuildConfig.ENDPOINT;
     }
 
     public GitHubComponent getGitHubComponent() {
