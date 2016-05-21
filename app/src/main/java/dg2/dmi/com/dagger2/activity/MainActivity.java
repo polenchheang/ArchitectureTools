@@ -1,12 +1,14 @@
 package dg2.dmi.com.dagger2.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -16,9 +18,10 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dg2.dmi.com.dagger2.R;
-import dg2.dmi.com.dagger2.dagger.GitHubModule;
 import dg2.dmi.com.dagger2.dagger.GitHubComponentInjectable;
-import dg2.dmi.com.dagger2.domain.Product;
+import dg2.dmi.com.dagger2.dagger.GitHubModule;
+import dg2.dmi.com.dagger2.product.adapter.ProductAdapter;
+import dg2.dmi.com.dagger2.product.domain.Product;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -28,8 +31,11 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     GitHubModule.GitHubInterface mGitHubInterface;
 
-    @Bind(R.id.text)
-    TextView mText;
+    @Bind(R.id.my_recycler_view)
+    RecyclerView mRecyclerView;
+
+
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        prepareList();
+    }
+
+    private void prepareList() {
+
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     @Override
@@ -57,17 +73,21 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        mText.setText("failed");
                         Toast.makeText(MainActivity.this,"It's error "+e.getMessage(),Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onNext(List<Product> product) {
-                        mText.setText("success");
+                        show(product);
                         Toast.makeText(MainActivity.this,"It's next on "+ product.size(),Toast.LENGTH_LONG).show();
                     }
                 });
 
+    }
+
+    private void show(@NonNull List<Product> product) {
+        ProductAdapter productAdapter = new ProductAdapter(product);
+        mRecyclerView.setAdapter(productAdapter);
     }
 
     @Override

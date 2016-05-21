@@ -5,7 +5,7 @@ import java.util.List;
 import dagger.Module;
 import dagger.Provides;
 import dg2.dmi.com.dagger2.dagger.scope.UserScope;
-import dg2.dmi.com.dagger2.domain.Product;
+import dg2.dmi.com.dagger2.product.domain.Product;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import rx.Observable;

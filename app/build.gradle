@@ -29,18 +29,25 @@ android {
     }
 
     productFlavors {
+        final ENDPOINT = "ENDPOINT"
+
+        localhost {
+            applicationIdSuffix ".dev"
+            buildConfigField "String", ENDPOINT, "\"http://192.168.43.130:9000\""
+        }
+
         dev {
             applicationIdSuffix ".dev"
-            buildConfigField "String", "ENDPOINT", "\"https://productlist-dev.herokuapp.com\""
+            buildConfigField "String", ENDPOINT, "\"https://productlist-dev.herokuapp.com\""
         }
 
         stage {
             applicationIdSuffix ".stage"
-            buildConfigField "String", "ENDPOINT", "\"https://productlist-stage.herokuapp.com\""
+            buildConfigField "String", ENDPOINT, "\"https://productlist-stage.herokuapp.com\""
         }
 
         production {
-            buildConfigField "String", "ENDPOINT", "\"https://productlist.herokuapp.com\""
+            buildConfigField "String", ENDPOINT, "\"https://productlist.herokuapp.com\""
         }
     }
 
