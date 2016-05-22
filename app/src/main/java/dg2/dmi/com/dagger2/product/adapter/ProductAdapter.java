@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import dg2.dmi.com.dagger2.product.domain.Product;
-import dg2.dmi.com.dagger2.product.ViewHolder.ProductViewHolder;
-import dg2.dmi.com.dagger2.product.ViewHolder.ViewHolderFactory;
+import dg2.dmi.com.dagger2.product.viewHolder.ProductViewHolder;
+import dg2.dmi.com.dagger2.product.viewHolder.ViewHolderFactory;
 
 /**
  * Created by polenchheang on 5/17/16.

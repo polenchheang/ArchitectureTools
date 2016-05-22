@@ -42,11 +42,11 @@ public class MainActivityTest {
 
     @Test
     public void testMockServer() throws Exception {
-        mServer.enqueue(new MockResponse().setResponseCode(400).setBody("No Body"));
+        mServer.enqueue(new MockResponse().setResponseCode(200).setBody("[{\"id\":0,\"title\":\"Title 1\",\"description\":\"Description 1\"},{\"id\":1,\"title\":\"Title 2\",\"description\":\"Description 2\"}]"));
         Intent intent = new Intent();
         mActivityTestRule.launchActivity(intent);
         Log.i("polenTest","launchActivity");
-        onView(withText("failed")).check(matches(isDisplayed()));
+        onView(withText("Title 2")).check(matches(isDisplayed()));
     }
 
     @After

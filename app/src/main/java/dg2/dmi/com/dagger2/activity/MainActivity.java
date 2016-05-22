@@ -15,7 +15,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dg2.dmi.com.dagger2.R;
 import dg2.dmi.com.dagger2.dagger.GitHubComponentInjectable;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     GitHubModule.GitHubInterface mGitHubInterface;
 
-    @Bind(R.id.my_recycler_view)
+    @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
 
 

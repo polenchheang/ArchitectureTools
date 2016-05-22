@@ -1,11 +1,11 @@
-package dg2.dmi.com.dagger2.product.ViewHolder;
+package dg2.dmi.com.dagger2.product.viewHolder;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dg2.dmi.com.dagger2.R;
 import dg2.dmi.com.dagger2.product.domain.Product;
@@ -21,9 +21,9 @@ public class NormalProductViewHolder extends ProductViewHolder {
         return new NormalProductViewHolder(view);
     }
 
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     TextView mTitle;
-    @Bind(R.id.description)
+    @BindView(R.id.description)
     TextView mDescription;
 
     public NormalProductViewHolder(View itemView) {

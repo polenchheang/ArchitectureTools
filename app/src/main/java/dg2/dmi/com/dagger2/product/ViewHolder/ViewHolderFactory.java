@@ -1,4 +1,4 @@
-package dg2.dmi.com.dagger2.product.ViewHolder;
+package dg2.dmi.com.dagger2.product.viewHolder;
 
 import android.view.ViewGroup;
 
