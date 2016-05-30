@@ -39,6 +39,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     }
 
 
-
-
+    public List<Product> geItems() {
+        return mProducts;
+    }
 }

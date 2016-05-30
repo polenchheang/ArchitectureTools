@@ -25,7 +25,8 @@ public class AppModule {
         return mContext;
     }
 
-    @Provides public Application provideApplication() {
+    @Provides
+    public Application provideApplication() {
         return (Application) mContext.getApplicationContext();
     }
 

@@ -2,9 +2,10 @@ package dg2.dmi.com.dagger2.dagger;
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
-import dg2.dmi.com.dagger2.dagger.scope.UserScope;
 import dg2.dmi.com.dagger2.product.domain.Product;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
@@ -21,7 +22,7 @@ public class GitHubModule {
     }
 
     @Provides
-    @UserScope
+    @Singleton
     public GitHubInterface provideGitHubInterface(Retrofit retrofit) {
         return retrofit.create(GitHubInterface.class);
     }

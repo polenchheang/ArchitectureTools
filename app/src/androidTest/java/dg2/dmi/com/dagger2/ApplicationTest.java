@@ -11,7 +11,7 @@ public class ApplicationTest extends Dagger2App {
 
     @NonNull
     @Override
-    protected String getBaseUrl() {
+    public String getBaseUrl() {
         Log.i("polenTest","BaseUrl get is " + mBaseUrlTest);
         return mBaseUrlTest;
     }

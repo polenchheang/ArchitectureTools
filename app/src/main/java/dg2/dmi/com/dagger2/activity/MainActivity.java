@@ -1,41 +1,40 @@
 package dg2.dmi.com.dagger2.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import dg2.dmi.com.dagger2.Dagger2App;
 import dg2.dmi.com.dagger2.R;
-import dg2.dmi.com.dagger2.dagger.GitHubComponentInjectable;
-import dg2.dmi.com.dagger2.dagger.GitHubModule;
-import dg2.dmi.com.dagger2.product.adapter.ProductAdapter;
-import dg2.dmi.com.dagger2.product.domain.Product;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import dg2.dmi.com.dagger2.dagger.DaggerProductListComponent;
+import dg2.dmi.com.dagger2.dagger.ProductListComponent;
+import dg2.dmi.com.dagger2.dagger.ProductListModule;
+import dg2.dmi.com.dagger2.product.ProductListView;
+import dg2.dmi.com.dagger2.product.presenter.ProductListPresenter;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Inject
-    GitHubModule.GitHubInterface mGitHubInterface;
+    @OnClick(R.id.fab)
+    void onRefresh() {
+        mPresenter.getProduct();
+    }
 
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
 
+    private static ProductListComponent sProductListComponent;
 
-    private LinearLayoutManager mLayoutManager;
+    @Inject
+    ProductListPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,51 +42,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        GitHubComponentInjectable.inject(this);
+        if (sProductListComponent == null) {
+            sProductListComponent = DaggerProductListComponent.builder()
+                    .gitHubComponent(
+                            ((Dagger2App)getApplication()).getGitHubComponent()
+                    )
+                    .productListModule(
+                            new ProductListModule()
+                    )
+                    .build();
+        }
+
+
+        sProductListComponent.inject(this);
+
+        mPresenter.bind(
+                new ProductListView(mRecyclerView)
+        );
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        prepareList();
-    }
-
-    private void prepareList() {
-
-        mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mGitHubInterface.getProductList()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Product>>() {
-                    @Override
-                    public void onCompleted() {
-                        Toast.makeText(MainActivity.this,"It's completed",Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(MainActivity.this,"It's error "+e.getMessage(),Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onNext(List<Product> product) {
-                        show(product);
-                        Toast.makeText(MainActivity.this,"It's next on "+ product.size(),Toast.LENGTH_LONG).show();
-                    }
-                });
-
-    }
-
-    private void show(@NonNull List<Product> product) {
-        ProductAdapter productAdapter = new ProductAdapter(product);
-        mRecyclerView.setAdapter(productAdapter);
+        mPresenter.getLastProducts();
     }
 
     @Override
@@ -110,5 +90,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.unBind();
+        if (!isChangingConfigurations()) {
+            sProductListComponent = null;
+        }
     }
 }

@@ -6,8 +6,6 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
@@ -29,7 +27,6 @@ public class NetModule {
     }
 
     @Provides
-    @Singleton
     Cache provideOkHttpCache(Application application) {
         int cacheSize = 10 * 1024 * 1024; // 10MB
         Cache cache = new Cache(application.getCacheDir(), cacheSize);
@@ -37,7 +34,6 @@ public class NetModule {
     }
 
     @Provides
-    @Singleton
     Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
@@ -45,7 +41,6 @@ public class NetModule {
     }
 
     @Provides
-    @Singleton
     OkHttpClient provideOkHttpClient(Cache cache) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

@@ -11,6 +11,8 @@ import dg2.dmi.com.dagger2.dagger.GitHubModule;
 import dg2.dmi.com.dagger2.dagger.NetComponent;
 import dg2.dmi.com.dagger2.dagger.NetModule;
 
+//import dg2.dmi.com.dagger2.dagger.DaggerGitHubComponent;
+
 /**
  * Created by gguser on 1/29/16.
  */
@@ -29,10 +31,11 @@ public class Dagger2App extends Application {
                 .netComponent(netComponent)
                 .gitHubModule(new GitHubModule())
                 .build();
+
     }
 
     @NonNull
-    protected String getBaseUrl() {
+    public String getBaseUrl() {
         return BuildConfig.ENDPOINT;
     }
 
