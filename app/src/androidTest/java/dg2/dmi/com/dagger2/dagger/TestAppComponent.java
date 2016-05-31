@@ -10,6 +10,5 @@ import dg2.dmi.com.dagger2.dagger.scope.AppScope;
 @AppScope
 @Component(modules = TestNetModule.class)
 public interface TestAppComponent {
-
     void inject(MainActivityTest activity);
 }

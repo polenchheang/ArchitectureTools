@@ -3,35 +3,22 @@ package dg2.dmi.com.dagger2.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import dg2.dmi.com.dagger2.Dagger2App;
 import dg2.dmi.com.dagger2.R;
-import dg2.dmi.com.dagger2.dagger.DaggerProductListComponent;
-import dg2.dmi.com.dagger2.dagger.ProductListComponent;
-import dg2.dmi.com.dagger2.dagger.ProductListModule;
-import dg2.dmi.com.dagger2.product.ProductListView;
+import dg2.dmi.com.dagger2.product.dagger.ProductListInjectable;
 import dg2.dmi.com.dagger2.product.presenter.ProductListPresenter;
 
 public class MainActivity extends AppCompatActivity {
 
-    @OnClick(R.id.fab)
-    void onRefresh() {
-        mPresenter.getProduct();
-    }
-
-    @BindView(R.id.my_recycler_view)
-    RecyclerView mRecyclerView;
-
-    private static ProductListComponent sProductListComponent;
+//    @OnClick(R.id.fab)
+//    void onRefresh() {
+//        mPresenter.getProduct();
+//    }
 
     @Inject
     ProductListPresenter mPresenter;
@@ -40,25 +27,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
-        if (sProductListComponent == null) {
-            sProductListComponent = DaggerProductListComponent.builder()
-                    .gitHubComponent(
-                            ((Dagger2App)getApplication()).getGitHubComponent()
-                    )
-                    .productListModule(
-                            new ProductListModule()
-                    )
-                    .build();
-        }
-
-
-        sProductListComponent.inject(this);
-
-        mPresenter.bind(
-                new ProductListView(mRecyclerView)
-        );
+        ProductListInjectable.inject(this);
+        mPresenter.bind(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mPresenter.getLastProducts();
+        mPresenter.onCreate();
     }
 
     @Override
@@ -95,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.unBind();
-        if (!isChangingConfigurations()) {
-            sProductListComponent = null;
-        }
+        ProductListInjectable.release(isChangingConfigurations());
     }
 }
