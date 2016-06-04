@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dg2.dmi.com.dagger2.R;
 import dg2.dmi.com.dagger2.product.dagger.ProductListInjectable;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         ProductListInjectable.inject(this);
         mPresenter.bind(this);
@@ -37,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mPresenter.onCreate();
     }
 
     @Override

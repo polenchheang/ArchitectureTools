@@ -42,4 +42,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     public List<Product> geItems() {
         return mProducts;
     }
+
+    public void setProducts(List<Product> products) {
+        this.mProducts = products;
+        notifyDataSetChanged();
+    }
 }

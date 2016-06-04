@@ -1,6 +1,7 @@
 package dg2.dmi.com.dagger2.product.dagger;
 
 import dagger.Component;
+import dg2.dmi.com.dagger2.product.interfaces.ProductListCallback;
 import dg2.dmi.com.dagger2.product.presenter.ProductListPresenter;
 
 /**
@@ -13,5 +14,5 @@ import dg2.dmi.com.dagger2.product.presenter.ProductListPresenter;
 )
 public interface ProductListViewComponent {
     void inject(ProductListPresenter presenter);
-    ProductListPresenter.Callback getProductListView();
+    ProductListCallback getProductListView();
 }

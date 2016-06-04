@@ -12,6 +12,7 @@ import dg2.dmi.com.dagger2.product.dagger.DaggerProductListViewComponent;
 import dg2.dmi.com.dagger2.product.dagger.ProductListViewComponent;
 import dg2.dmi.com.dagger2.product.dagger.ProductListViewModule;
 import dg2.dmi.com.dagger2.product.domain.Product;
+import dg2.dmi.com.dagger2.product.interfaces.ProductListCallback;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -30,10 +31,11 @@ public final class ProductListPresenter {
     private ProductListViewComponent mProductListViewComponent;
 
     @Inject
-    Callback mCallback = mNullCallBack;
+    ProductListCallback mCallback = mNullCallBack;
 
     public ProductListPresenter(@NonNull GitHubModule.GitHubInterface gitHubInterface) {
         mGitHubInterface = gitHubInterface;
+        getProduct();
     }
 
     public void getProduct() {
@@ -60,6 +62,11 @@ public final class ProductListPresenter {
     }
 
     public void bind(@NonNull MainActivity activity) {
+        getView(activity);
+        provide();
+    }
+
+    private void getView(@NonNull MainActivity activity) {
         mProductListViewComponent = DaggerProductListViewComponent.builder()
                 .productListViewModule(
                         new ProductListViewModule(activity)
@@ -68,26 +75,20 @@ public final class ProductListPresenter {
         mProductListViewComponent.inject(this);
     }
 
+    private void provide() {
+        if (mLastProducts != null) {
+            mCallback.onNext(mLastProducts);
+        } else {
+            getProduct();
+        }
+    }
+
     public void unBind() {
         mProductListViewComponent = null;
         mCallback = mNullCallBack;
     }
 
-    public void onCreate() {
-        if (mLastProducts == null) {
-            getProduct();
-        } else {
-            mCallback.onNext(mLastProducts);
-        }
-    }
-
-    public interface Callback {
-        void onCompleted();
-        void onError(Throwable e);
-        void onNext(List<Product> products);
-    }
-
-    private class NullCallBack implements Callback {
+    private class NullCallBack implements ProductListCallback {
 
         @Override
         public void onCompleted() {
