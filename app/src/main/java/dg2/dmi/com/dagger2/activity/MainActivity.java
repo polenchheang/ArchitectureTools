@@ -15,7 +15,7 @@ import dg2.dmi.com.dagger2.product.presenter.ProductListPresenter;
 
 public class MainActivity extends AppCompatActivity {
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.refresh)
     void onRefresh() {
         mPresenter.getProduct();
     }

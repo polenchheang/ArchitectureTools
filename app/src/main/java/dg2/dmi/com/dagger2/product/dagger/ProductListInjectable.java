@@ -13,7 +13,7 @@ public class ProductListInjectable {
     public static void inject(MainActivity activity) {
         if (sProductListComponent == null) {
             sProductListComponent = DaggerProductListPresenterComponent.builder()
-                    .gitHubComponent(
+                    .productListModelComponent(
                             ((Dagger2App)activity.getApplication()).getGitHubComponent()
                     )
                     .productListPresenterModule(

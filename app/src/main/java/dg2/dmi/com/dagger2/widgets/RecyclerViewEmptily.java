@@ -31,6 +31,7 @@ public class RecyclerViewEmptily extends RecyclerView {
         super.onAttachedToWindow();
         if (!isInEditMode()) {
             mEmptyView = ((Activity) getContext()).findViewById(android.R.id.empty);
+            checkEmpty();
         }
     }
 
@@ -47,17 +48,21 @@ public class RecyclerViewEmptily extends RecyclerView {
     AdapterDataObserver mAdapterDataObserver = new AdapterDataObserver() {
         @Override
         public void onChanged() {
-            Adapter<?> adapter = getAdapter();
             if (mEmptyView != null) {
-                if (adapter != null && adapter.getItemCount() == 0) {
-                    mEmptyView.setVisibility(VISIBLE);
-                    setVisibility(GONE);
-                } else {
-                    mEmptyView.setVisibility(GONE);
-                    setVisibility(VISIBLE);
-                }
+                checkEmpty();
             }
         }
 
     };
+
+    private void checkEmpty() {
+        Adapter<?> adapter = getAdapter();
+        if (adapter != null && adapter.getItemCount() == 0) {
+            mEmptyView.setVisibility(VISIBLE);
+            setVisibility(GONE);
+        } else {
+            mEmptyView.setVisibility(GONE);
+            setVisibility(VISIBLE);
+        }
+    }
 }

@@ -2,9 +2,8 @@ package dg2.dmi.com.dagger2.product.dagger;
 
 import dagger.Component;
 import dg2.dmi.com.dagger2.activity.MainActivity;
-import dg2.dmi.com.dagger2.dagger.GitHubComponent;
-import dg2.dmi.com.dagger2.dagger.GitHubModule;
 import dg2.dmi.com.dagger2.dagger.scope.ProductListScope;
+import dg2.dmi.com.dagger2.product.interfaces.ProductListApi;
 import dg2.dmi.com.dagger2.product.presenter.ProductListPresenter;
 
 /**
@@ -12,13 +11,13 @@ import dg2.dmi.com.dagger2.product.presenter.ProductListPresenter;
  */
 @ProductListScope
 @Component(
-        dependencies = GitHubComponent.class,
+        dependencies = ProductListModelComponent.class,
         modules = {
                 ProductListPresenterModule.class
         }
 )
 public interface ProductListPresenterComponent {
     void inject(MainActivity activity);
-    GitHubModule.GitHubInterface getGitHubInterface();
+    ProductListApi getGitHubInterface();
     ProductListPresenter getPresenter();
 }

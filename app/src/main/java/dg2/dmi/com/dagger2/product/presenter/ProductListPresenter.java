@@ -7,12 +7,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dg2.dmi.com.dagger2.activity.MainActivity;
-import dg2.dmi.com.dagger2.dagger.GitHubModule;
 import dg2.dmi.com.dagger2.product.dagger.DaggerProductListViewComponent;
 import dg2.dmi.com.dagger2.product.dagger.ProductListViewComponent;
 import dg2.dmi.com.dagger2.product.dagger.ProductListViewModule;
 import dg2.dmi.com.dagger2.product.domain.Product;
 import dg2.dmi.com.dagger2.product.interfaces.ProductListCallback;
+import dg2.dmi.com.dagger2.product.interfaces.ProductListApi;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -23,7 +23,7 @@ import rx.schedulers.Schedulers;
 
 public final class ProductListPresenter {
 
-    private GitHubModule.GitHubInterface mGitHubInterface;
+    private ProductListApi mProductListModel;
     private List<Product> mLastProducts;
 
     private NullCallBack mNullCallBack = new NullCallBack();
@@ -33,13 +33,13 @@ public final class ProductListPresenter {
     @Inject
     ProductListCallback mCallback = mNullCallBack;
 
-    public ProductListPresenter(@NonNull GitHubModule.GitHubInterface gitHubInterface) {
-        mGitHubInterface = gitHubInterface;
+    public ProductListPresenter(@NonNull ProductListApi productListModel) {
+        mProductListModel = productListModel;
         getProduct();
     }
 
     public void getProduct() {
-        mGitHubInterface.getProductList()
+        mProductListModel.getProductList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Product>>() {

@@ -4,8 +4,8 @@ import android.util.Log;
 
 import dagger.Module;
 import dagger.Provides;
-import dg2.dmi.com.dagger2.dagger.GitHubModule;
 import dg2.dmi.com.dagger2.dagger.scope.ProductListScope;
+import dg2.dmi.com.dagger2.product.interfaces.ProductListApi;
 import dg2.dmi.com.dagger2.product.presenter.ProductListPresenter;
 
 /**
@@ -16,8 +16,8 @@ public class ProductListPresenterModule {
 
     @Provides
     @ProductListScope
-    ProductListPresenter providePresenter(GitHubModule.GitHubInterface gitHubInterface) {
+    ProductListPresenter providePresenter(ProductListApi productListModel) {
         Log.d("Me","providePresenter");
-        return new ProductListPresenter(gitHubInterface);
+        return new ProductListPresenter(productListModel);
     }
 }
