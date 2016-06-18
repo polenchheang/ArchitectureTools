@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/intermediates/res/merged/modernDev/debug/color-v11/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.0.0-beta1/res/color-v11/abc_background_cache_hint_selector_material_dark.xml"
+    },
+    {
+        "merged": "/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/intermediates/res/merged/modernDev/debug/color-v11/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.0.0-beta1/res/color-v11/abc_background_cache_hint_selector_material_light.xml"
+    }
+]

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="x86"
+    api-level="23"
+    density="560dpi"
+    format="7"
+    timestamp="1466251133570683000"
+    token="5832280952771108418" >
+
+    <task
+        name="javac"
+        duration="3412" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="445" />
+    <task
+        name="verifier"
+        duration="67" />
+
+    <artifact
+        location="/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/outputs/apk/app-modern-dev-debug.apk"
+        type="MAIN" />
+
+    <build timestamp="1466251133570683000" >
+        <artifact
+            location="/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/outputs/apk/app-modern-dev-debug.apk"
+            type="MAIN" />
+    </build>
+
+</instant-run>

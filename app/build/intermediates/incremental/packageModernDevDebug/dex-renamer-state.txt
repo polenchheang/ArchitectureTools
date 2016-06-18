@@ -1,0 +1,7 @@
+#Sat Jun 18 18:59:18 ICT 2016
+base.0=/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/intermediates/transforms/dex/modernDev/debug/folders/1000/10/instant-run-bootstrap_3fc9dfa4e9dc162a64cc2fb3b8be43c30bdb3fcf
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/intermediates/transforms/dex/modernDev/debug/folders/1000/10/instant-run_ee1c274725a28b102a175411ec479ce85948f2c0/classes.dex
+base.1=/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/intermediates/transforms/dex/modernDev/debug/folders/1000/10/instant-run_ee1c274725a28b102a175411ec479ce85948f2c0
+file.0=/Users/polenchheang/WorkSpaces/Android/architecttool/app/build/intermediates/transforms/dex/modernDev/debug/folders/1000/10/instant-run-bootstrap_3fc9dfa4e9dc162a64cc2fb3b8be43c30bdb3fcf/classes.dex
