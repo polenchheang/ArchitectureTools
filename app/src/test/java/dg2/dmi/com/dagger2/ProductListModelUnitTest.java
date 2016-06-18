@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dg2.dmi.com.dagger2.product.domain.Product;
-import dg2.dmi.com.dagger2.product.interfaces.ProductListApi;
+import dg2.dmi.com.dagger2.product.productList.Api;
 import dg2.dmi.com.dagger2.product.productList.ModelEventListener;
-import dg2.dmi.com.dagger2.product.productList.ModelImpl;
+import dg2.dmi.com.dagger2.product.productList.implement.ModelImpl;
 import rx.Observable;
 
 import static org.junit.Assert.assertEquals;
@@ -32,7 +32,7 @@ public class ProductListModelUnitTest {
     public void setUp() throws Exception {
         mProducts = new ArrayList<>(1);
         mProducts.add(new Product());
-        mModel = new ModelImpl(new ProductListApi() {
+        mModel = new ModelImpl(new Api() {
             @Override
             public Observable<List<Product>> getProductList() {
                 return Observable.just(mProducts);
@@ -82,6 +82,11 @@ public class ProductListModelUnitTest {
         @Override
         public void onResult(@NonNull List<Product> products) {
             mProducts = products;
+        }
+
+        @Override
+        public void releaseResource() {
+
         }
 
         List<Product> getLastResult() {

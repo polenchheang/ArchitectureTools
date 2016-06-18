@@ -45,7 +45,8 @@ public class NetModule {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.cache(cache).addInterceptor(loggingInterceptor);
+        builder.cache(cache);
+        builder.addInterceptor(loggingInterceptor);
         return builder.build();
     }
 

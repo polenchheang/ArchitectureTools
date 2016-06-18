@@ -3,6 +3,7 @@ package dg2.dmi.com.dagger2.widgets;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
@@ -11,19 +12,22 @@ import android.view.View;
  * Created by polenchheang on 6/4/16.
  */
 
-public class RecyclerViewEmptily extends RecyclerView {
+public class ProductListView extends RecyclerView {
     private View mEmptyView;
 
-    public RecyclerViewEmptily(Context context) {
+    public ProductListView(Context context) {
         this(context,null);
     }
 
-    public RecyclerViewEmptily(Context context, @Nullable AttributeSet attrs) {
+    public ProductListView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public RecyclerViewEmptily(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public ProductListView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(VERTICAL);
+        setLayoutManager(linearLayoutManager);
     }
 
     @Override

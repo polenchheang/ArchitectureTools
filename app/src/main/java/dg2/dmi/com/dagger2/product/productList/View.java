@@ -15,4 +15,5 @@ public interface View {
     void showError(@NonNull Exception e);
     void registerEventListener(@NonNull ViewEventListener eventListener);
     void releaseEventListener();
+    void showLoading();
 }

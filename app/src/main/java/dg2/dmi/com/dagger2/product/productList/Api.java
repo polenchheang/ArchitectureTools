@@ -1,4 +1,4 @@
-package dg2.dmi.com.dagger2.product.interfaces;
+package dg2.dmi.com.dagger2.product.productList;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import rx.Observable;
 /**
  * Created by polenchheang on 6/5/16.
  */
-public interface ProductListApi {
+public interface Api {
     @GET("/products")
     Observable<List<Product>> getProductList();
 }

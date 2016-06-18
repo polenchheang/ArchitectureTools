@@ -2,4 +2,5 @@
     <string name="app_name">Dagger2</string>
     <string name="action_settings">Settings</string>
     <string name="product_list_empty">There is no products</string>
+    <string name="error_message">There are Errors !</string>
 </resources>
