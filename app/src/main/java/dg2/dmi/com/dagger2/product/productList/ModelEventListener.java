@@ -14,4 +14,5 @@ public interface ModelEventListener {
     void onStart();
     void onError(@NonNull Exception e);
     void onResult(@NonNull List<Product> products);
+    void releaseResource();
 }

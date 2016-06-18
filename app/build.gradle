@@ -7,11 +7,12 @@ android {
 
     defaultConfig {
         applicationId "dg2.dmi.com.dagger2"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "dg2.dmi.com.dagger2.Dagger2TestRunner"
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -38,27 +39,43 @@ android {
         }
     }
 
+    flavorDimensions "multidex", "server"
+
     productFlavors {
         final ENDPOINT = "ENDPOINT"
 
         localhost {
+            dimension "server"
             applicationIdSuffix ".dev"
             buildConfigField "String", ENDPOINT, "\"http://192.168.43.130:9000\""
         }
 
         dev {
+            dimension "server"
             applicationIdSuffix ".dev"
             buildConfigField "String", ENDPOINT, "\"https://productlist-dev.herokuapp.com\""
             signingConfig signingConfigs.debug
         }
 
         stage {
+            dimension "server"
             applicationIdSuffix ".stage"
             buildConfigField "String", ENDPOINT, "\"https://productlist-stage.herokuapp.com\""
         }
 
         production {
+            dimension "server"
             buildConfigField "String", ENDPOINT, "\"https://productlist.herokuapp.com\""
+        }
+
+        legacy {
+            dimension "multidex"
+            minSdkVersion 19
+        }
+
+        modern {
+            dimension "multidex"
+            minSdkVersion 21
         }
     }
 
@@ -75,53 +92,48 @@ android {
 }
 
 final DAGGER_VERSION = '2.4'
-final ESPRESSO_VERSION = '2.2.2'
-final ESPRESSO_RUNNER_VERSION = '0.4.1'
-final SUPPORT_VERSION = '23.4.0'
-final OK_HTTP_VERSION = '3.3.1'
-final RETROFIT_VERSION = '2.0.2'
 
 dependencies {
     testCompile 'junit:junit:4.12'
 
-    compile "com.google.dagger:dagger:${DAGGER_VERSION}"
+    compile 'com.google.dagger:dagger:2.4'
     apt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
 
-    compile "com.android.support:design:${SUPPORT_VERSION}"
-    compile "com.android.support:support-v4:${SUPPORT_VERSION}"
+    compile 'com.android.support:design:24.0.0-beta1'
+    compile 'com.android.support:support-v4:24.0.0-beta1'
     provided 'javax.annotation:jsr250-api:1.0'
 
     compile 'com.google.code.gson:gson:2.6.2'
-    compile "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
 
-    compile "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
-    compile "com.squareup.okhttp3:logging-interceptor:${OK_HTTP_VERSION}"
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     compile 'io.reactivex:rxandroid:1.2.0'
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     compile 'io.reactivex:rxjava:1.1.5'
     // Need to add this when create retrofit .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-    compile "com.squareup.retrofit2:adapter-rxjava:${RETROFIT_VERSION}"
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
 
-    androidTestCompile "com.squareup.okhttp3:mockwebserver:${OK_HTTP_VERSION}"
+    androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.3.1'
 
-    androidTestCompile "com.android.support.test:runner:${ESPRESSO_RUNNER_VERSION}"
-    androidTestCompile "com.android.support.test:rules:${ESPRESSO_RUNNER_VERSION}"
-    androidTestCompile "com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}"
-    androidTestCompile ("com.android.support.test.espresso:espresso-contrib:${ESPRESSO_VERSION}") {
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2.2') {
         exclude(group: 'com.android.support', module: 'recyclerview-v7')
     }
-    androidTestCompile "com.android.support:design:${SUPPORT_VERSION}"
-    androidTestCompile "com.android.support:support-v4:${SUPPORT_VERSION}"
+    androidTestCompile "com.android.support:design:24.0.0-beta1"
+    androidTestCompile "com.android.support:support-v4:24.0.0-beta1"
 
     androidTestApt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
 }
 
 configurations.all {
-    resolutionStrategy.force "com.android.support:support-annotations:${SUPPORT_VERSION}"
+    resolutionStrategy.force "com.android.support:support-annotations:24.0.0-beta1"
 }
 
 configurations.compile.dependencies.each { compileDependency ->

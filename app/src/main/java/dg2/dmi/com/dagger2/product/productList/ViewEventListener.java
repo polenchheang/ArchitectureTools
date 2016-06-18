@@ -11,4 +11,5 @@ import dg2.dmi.com.dagger2.product.domain.Product;
 public interface ViewEventListener {
     void onRefresh();
     void onItemSelected(int index,@NonNull Product product);
+    void releaseResource();
 }
