@@ -1,0 +1,6 @@
+<application>
+  <component name="PathMacrosImpl">
+    <macro name="PROJECTDIR" value="/Users/polenchheang/WorkSpaces/Android/architecttool" />
+    <macro name="USERHOME" value="/Users/polenchheang" />
+  </component>
+</application>
