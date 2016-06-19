@@ -4,7 +4,6 @@ package dg2.dmi.com.dagger2.product.domain;
  * Created by polenchheang on 5/8/16.
  */
 public class Product {
-    public static Long INVALID_ID = -1L;
 
     private Long id;
     private String title;
