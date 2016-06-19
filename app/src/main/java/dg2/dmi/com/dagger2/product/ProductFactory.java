@@ -5,8 +5,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.ViewGroup;
 
 import dg2.dmi.com.dagger2.AppHelper;
-import dg2.dmi.com.dagger2.dagger.AppModule;
-import dg2.dmi.com.dagger2.dagger.NetModule;
+import dg2.dmi.com.dagger2.di.module.AppModule;
+import dg2.dmi.com.dagger2.di.module.NetModule;
 import dg2.dmi.com.dagger2.product.productList.di.component.DaggerProductListComponent;
 import dg2.dmi.com.dagger2.product.productList.di.component.DaggerProductListNullObjectComponent;
 import dg2.dmi.com.dagger2.product.productList.di.component.DaggerProductListViewComponent;

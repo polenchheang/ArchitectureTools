@@ -2,8 +2,8 @@ package dg2.dmi.com.dagger2.product.productList.di.component;
 
 import dagger.Component;
 import dg2.dmi.com.dagger2.activity.ProductListActivity;
-import dg2.dmi.com.dagger2.dagger.AppModule;
-import dg2.dmi.com.dagger2.dagger.NetModule;
+import dg2.dmi.com.dagger2.di.module.AppModule;
+import dg2.dmi.com.dagger2.di.module.NetModule;
 import dg2.dmi.com.dagger2.product.productList.Presenter;
 import dg2.dmi.com.dagger2.product.productList.di.module.ProductListModule;
 import dg2.dmi.com.dagger2.product.productList.di.scope.ProductListScope;

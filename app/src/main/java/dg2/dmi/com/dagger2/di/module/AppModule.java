@@ -1,12 +1,11 @@
-package dg2.dmi.com.dagger2.dagger;
+package dg2.dmi.com.dagger2.di.module;
 
 import android.app.Application;
 import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
-import dg2.dmi.com.dagger2.dagger.scope.AppScope;
-import dg2.dmi.com.dagger2.product.domain.DummyObject;
+import dg2.dmi.com.dagger2.di.scope.AppScope;
 
 /**
  * Created by gguser on 1/29/16.
@@ -30,9 +29,4 @@ public class AppModule {
         return (Application) mContext.getApplicationContext();
     }
 
-    @Provides
-    @AppScope
-    public DummyObject provideDummyObject() {
-        return new DummyObject("Not Test");
-    }
 }

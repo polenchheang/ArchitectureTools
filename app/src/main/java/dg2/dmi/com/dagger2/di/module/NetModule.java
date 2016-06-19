@@ -1,4 +1,4 @@
-package dg2.dmi.com.dagger2.dagger;
+package dg2.dmi.com.dagger2.di.module;
 
 import android.app.Application;
 
@@ -29,8 +29,7 @@ public class NetModule {
     @Provides
     Cache provideOkHttpCache(Application application) {
         int cacheSize = 10 * 1024 * 1024; // 10MB
-        Cache cache = new Cache(application.getCacheDir(), cacheSize);
-        return cache;
+        return new Cache(application.getCacheDir(), cacheSize);
     }
 
     @Provides
@@ -52,12 +51,11 @@ public class NetModule {
 
     @Provides
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
-        Retrofit retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(mBaseUrl)
                 .client(okHttpClient)
                 .build();
-        return retrofit;
     }
 }

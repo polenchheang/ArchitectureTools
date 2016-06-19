@@ -1,7 +1,8 @@
-package dg2.dmi.com.dagger2.dagger;
+package dg2.dmi.com.dagger2.di.component;
 
 import dagger.Component;
-import okhttp3.OkHttpClient;
+import dg2.dmi.com.dagger2.di.module.AppModule;
+import dg2.dmi.com.dagger2.di.module.NetModule;
 import retrofit2.Retrofit;
 
 /**
@@ -10,5 +11,4 @@ import retrofit2.Retrofit;
 @Component(modules = {AppModule.class,NetModule.class})
 public interface NetComponent {
     Retrofit retrofit();
-    OkHttpClient okHttpClient();
 }
