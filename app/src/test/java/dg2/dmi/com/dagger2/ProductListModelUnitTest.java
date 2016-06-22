@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dg2.dmi.com.dagger2.product.domain.Product;
-import dg2.dmi.com.dagger2.product.productList.Api;
-import dg2.dmi.com.dagger2.product.productList.ModelEventListener;
+import dg2.dmi.com.dagger2.product.productList.inteface.Api;
+import dg2.dmi.com.dagger2.product.productList.inteface.ModelEventListener;
 import dg2.dmi.com.dagger2.product.productList.implement.ModelImpl;
 import rx.Observable;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.

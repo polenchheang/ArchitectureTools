@@ -7,15 +7,15 @@ import android.support.v7.widget.Toolbar;
 import javax.inject.Inject;
 
 import dg2.dmi.com.dagger2.R;
-import dg2.dmi.com.dagger2.product.ProductFactory;
-import dg2.dmi.com.dagger2.product.productList.Presenter;
-import dg2.dmi.com.dagger2.product.productList.di.component.ProductListComponent;
-import dg2.dmi.com.dagger2.product.productList.di.component.ProductListViewComponent;
+import dg2.dmi.com.dagger2.product.productList.factory.ProductFactory;
+import dg2.dmi.com.dagger2.product.productList.di.component.PresenterComponent;
+import dg2.dmi.com.dagger2.product.productList.inteface.Presenter;
+import dg2.dmi.com.dagger2.product.productList.di.component.ViewComponent;
 
 public class ProductListActivity extends AppCompatActivity {
 
-    private ProductListComponent mProductListComponent;
-    private ProductListViewComponent mProductListViewComponent;
+    private PresenterComponent mPresenterComponent;
+    private ViewComponent mViewComponent;
 
     @Inject
     Presenter mPresenter;
@@ -25,8 +25,8 @@ public class ProductListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
-        mProductListComponent = ProductFactory.getProductListComponent(this);
-        mProductListComponent.inject(this);
+        mPresenterComponent = ProductFactory.getProductListComponent(this);
+        mPresenterComponent.inject(this);
 
         getViewComponent();
 
@@ -36,21 +36,21 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
     private void getViewComponent() {
-        mProductListViewComponent = ProductFactory.getProductListView(this,mProductListComponent);
-        mProductListViewComponent.provideView();
+        mViewComponent = ProductFactory.getProductListView(this, mPresenterComponent);
+        mViewComponent.provideView();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (mProductListViewComponent == null) {
+        if (mViewComponent == null) {
             getViewComponent();
         }
     }
 
     @Override
-    public ProductListComponent onRetainCustomNonConfigurationInstance() {
-        return mProductListComponent;
+    public PresenterComponent onRetainCustomNonConfigurationInstance() {
+        return mPresenterComponent;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ProductListActivity extends AppCompatActivity {
         if (!isChangingConfigurations()) {
             mPresenter.releaseModel();
         }
-        mProductListViewComponent = null;
+        mViewComponent = null;
         super.onPause();
     }
 }

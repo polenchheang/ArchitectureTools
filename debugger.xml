@@ -1,5 +1,5 @@
 <application>
-  <component name="DebuggerSettings">
+  <presenterComponent name="DebuggerSettings">
     <option name="TRACING_FILTERS_ENABLED" value="true" />
     <option name="FORCE_CLASSIC_VM" value="true" />
     <option name="SKIP_SYNTHETIC_METHODS" value="true" />
@@ -62,9 +62,9 @@
       <option name="PATTERN" value="com.ibm.ws.*" />
       <option name="ENABLED" value="true" />
     </filter>
-  </component>
-  <component name="XDebuggerSettings">
+  </presenterComponent>
+  <presenterComponent name="XDebuggerSettings">
     <data-views />
     <general />
-  </component>
+  </presenterComponent>
 </application>

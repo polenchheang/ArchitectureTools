@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
-import dg2.dmi.com.dagger2.product.ProductFactory;
-import dg2.dmi.com.dagger2.product.productList.Model;
-import dg2.dmi.com.dagger2.product.productList.Presenter;
-import dg2.dmi.com.dagger2.product.productList.View;
+import dg2.dmi.com.dagger2.product.productList.factory.ProductFactory;
+import dg2.dmi.com.dagger2.product.productList.inteface.Model;
+import dg2.dmi.com.dagger2.product.productList.inteface.Presenter;
+import dg2.dmi.com.dagger2.product.productList.inteface.View;
 
 /**
  * Created by polenchheang on 6/5/16.
@@ -43,8 +43,8 @@ public class PresenterImpl implements Presenter {
     }
 
     private void something() {
-        mModel.registerEventListener(new ModelEventListenerImpl(mView));
-        mView.registerEventListener(new ViewEventListenerImpl(mModel));
+        mModel.registerEventListener(new ModelEventHandler(mView));
+        mView.registerEventListener(new ViewEventHandler(mModel));
     }
 
     @Override

@@ -1,5 +1,5 @@
 <application>
-  <component name="KeymapManager">
+  <presenterComponent name="KeymapManager">
     <active_keymap name="Mac OS X" />
-  </component>
+  </presenterComponent>
 </application>

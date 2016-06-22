@@ -7,11 +7,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import dg2.dmi.com.dagger2.product.ProductFactory;
+import dg2.dmi.com.dagger2.product.productList.factory.ProductFactory;
 import dg2.dmi.com.dagger2.product.domain.Product;
-import dg2.dmi.com.dagger2.product.productList.Api;
-import dg2.dmi.com.dagger2.product.productList.Model;
-import dg2.dmi.com.dagger2.product.productList.ModelEventListener;
+import dg2.dmi.com.dagger2.product.productList.inteface.Api;
+import dg2.dmi.com.dagger2.product.productList.inteface.Model;
+import dg2.dmi.com.dagger2.product.productList.inteface.ModelEventListener;
 import rx.Observable;
 import rx.Subscriber;
 

@@ -1,5 +1,5 @@
 <application>
-  <component name="LafManager">
+  <presenterComponent name="LafManager">
     <laf class-name="com.intellij.ide.ui.laf.IntelliJLaf" />
-  </component>
+  </presenterComponent>
 </application>

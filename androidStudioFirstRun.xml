@@ -1,5 +1,5 @@
 <application>
-  <component name="AndroidFirstRunPersistentData">
+  <presenterComponent name="AndroidFirstRunPersistentData">
     <version>1</version>
-  </component>
+  </presenterComponent>
 </application>

@@ -14,11 +14,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dg2.dmi.com.dagger2.R;
-import dg2.dmi.com.dagger2.product.ProductFactory;
-import dg2.dmi.com.dagger2.product.adapter.ProductAdapter;
+import dg2.dmi.com.dagger2.product.productList.factory.ProductFactory;
+import dg2.dmi.com.dagger2.product.productList.adapter.ProductListAdapter;
 import dg2.dmi.com.dagger2.product.domain.Product;
-import dg2.dmi.com.dagger2.product.productList.View;
-import dg2.dmi.com.dagger2.product.productList.ViewEventListener;
+import dg2.dmi.com.dagger2.product.productList.inteface.View;
+import dg2.dmi.com.dagger2.product.productList.inteface.ViewEventListener;
 
 /**
  * Created by polenchheang on 6/5/16.
@@ -38,7 +38,7 @@ public class ViewImpl implements View {
     @BindView(R.id.refresh)
     android.view.View mRefreshView;
 
-    private final ProductAdapter mAdapter;
+    private final ProductListAdapter mAdapter;
     private ViewEventListener mEventListener;
 
     @OnClick(R.id.refresh)
@@ -48,7 +48,7 @@ public class ViewImpl implements View {
 
     public ViewImpl(@NonNull ViewGroup root) {
         ButterKnife.bind(this,root);
-        mAdapter = new ProductAdapter(mEmptyList);
+        mAdapter = new ProductListAdapter(mEmptyList);
         mList.setAdapter(mAdapter);
         ProductFactory.getNullObjectComponent().inject(this);
     }

@@ -4,9 +4,9 @@ import android.view.ViewGroup;
 
 import dagger.Module;
 import dagger.Provides;
-import dg2.dmi.com.dagger2.product.productList.Presenter;
-import dg2.dmi.com.dagger2.product.productList.View;
-import dg2.dmi.com.dagger2.product.productList.di.scope.MainActivityScope;
+import dg2.dmi.com.dagger2.product.productList.inteface.Presenter;
+import dg2.dmi.com.dagger2.product.productList.inteface.View;
+import dg2.dmi.com.dagger2.product.productList.di.scope.ViewScope;
 import dg2.dmi.com.dagger2.product.productList.implement.ViewImpl;
 
 /**
@@ -21,7 +21,7 @@ public class ProductListViewModule {
     }
 
     @Provides
-    @MainActivityScope
+    @ViewScope
     public View provideProductListView(Presenter presenter) {
         View view = new ViewImpl(mRootView);
         presenter.bind(view);

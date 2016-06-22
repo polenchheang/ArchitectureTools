@@ -8,10 +8,10 @@ import java.util.List;
 import dagger.Module;
 import dagger.Provides;
 import dg2.dmi.com.dagger2.product.domain.Product;
-import dg2.dmi.com.dagger2.product.productList.Model;
-import dg2.dmi.com.dagger2.product.productList.ModelEventListener;
-import dg2.dmi.com.dagger2.product.productList.View;
-import dg2.dmi.com.dagger2.product.productList.ViewEventListener;
+import dg2.dmi.com.dagger2.product.productList.inteface.Model;
+import dg2.dmi.com.dagger2.product.productList.inteface.ModelEventListener;
+import dg2.dmi.com.dagger2.product.productList.inteface.View;
+import dg2.dmi.com.dagger2.product.productList.inteface.ViewEventListener;
 
 /**
  * Created by gguser on 6/10/16.

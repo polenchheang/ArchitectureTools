@@ -3,7 +3,7 @@ package dg2.dmi.com.dagger2.product.productList.implement;
 import java.util.List;
 
 import dg2.dmi.com.dagger2.product.domain.Product;
-import dg2.dmi.com.dagger2.product.productList.Api;
+import dg2.dmi.com.dagger2.product.productList.inteface.Api;
 import retrofit2.Retrofit;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

@@ -3,7 +3,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '24'
 
     defaultConfig {
         applicationId "dg2.dmi.com.dagger2"
@@ -17,7 +17,7 @@ android {
 
     signingConfigs {
 
-        debug {
+        release {
             storeFile file('productlist.keystore')
             storePassword "android"
             keyAlias "android"
@@ -54,7 +54,6 @@ android {
             dimension "server"
             applicationIdSuffix ".dev"
             buildConfigField "String", ENDPOINT, "\"https://productlist-dev.herokuapp.com\""
-            signingConfig signingConfigs.debug
         }
 
         stage {
@@ -89,14 +88,18 @@ android {
         javaMaxHeapSize "2048m"
         preDexLibraries true
     }
+
+    dataBinding {
+        enabled = true
+    }
+
 }
 
-final DAGGER_VERSION = '2.4'
+final DAGGER_VERSION = '2.2'
 
 dependencies {
-    testCompile 'junit:junit:4.12'
 
-    compile 'com.google.dagger:dagger:2.4'
+    compile "com.google.dagger:dagger:${DAGGER_VERSION}"
     apt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
 
     compile 'com.android.support:design:24.0.0-beta1'
@@ -132,6 +135,7 @@ dependencies {
     androidTestApt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
 
     testCompile "org.mockito:mockito-core:1.10.19"
+    testCompile 'junit:junit:4.12'
 }
 
 configurations.all {
